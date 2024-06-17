@@ -28,7 +28,7 @@ export default function App() {
       <View className="items-center">
         <Image 
             source={images.vectorSmart}
-            className="w-[90px] h-[84px] mb-5"
+            className="w-[140px] h-[110px] mb-5"
             resizeMode="contain"
         />
         <Text className="text-white font-semibold text-4xl font-Inter">Shape Your Body</Text>

@@ -61,17 +61,6 @@ const TabsLayout = () => {
           ),
         }}
       />
-
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: "Settings",
-          headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <TabIcon icon={icons.settings} color={color} />
-          ),
-        }}
-      />
     </Tabs>
   );
 };
