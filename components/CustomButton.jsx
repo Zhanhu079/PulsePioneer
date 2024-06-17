@@ -6,9 +6,9 @@ const CustomButton = ({ title, handlePress, otherStyles }) => {
     <TouchableOpacity
         onPress={handlePress}
         activeOpacity={0.7}
-        className="bg-customPink w-full items-center py-3 rounded-lg"
+        className={`bg-customPink w-full items-center py-3 rounded-lg ${otherStyles}`}
     >
-        <Text className="text-white font-semibold text-lg">{title}</Text>
+        <Text className="text-white font-semibold text-lg font-DMSans">{title}</Text>
     </TouchableOpacity>
   )
 }
