@@ -31,7 +31,7 @@ export default function App() {
             className="w-[90px] h-[84px] mb-5"
             resizeMode="contain"
         />
-        <Text className="text-white font-bold text-4xl font-Inter">Shape Your Body</Text>
+        <Text className="text-white font-semibold text-4xl font-Inter">Shape Your Body</Text>
         <Text className="text-grayfont mt-4 text-center font-DMSans">
         Embark on a journey where every sweat drop counts and every heartbeat echoes your dedication with {""} 
           <Text className="text-customPink font-semibold">Pulse Pioneer</Text>.
@@ -39,7 +39,7 @@ export default function App() {
       </View>
 
       <View className="w-full">
-        <CustomButton title="LOGIN" handlePress={() => router.push('/sign-in')} />
+        <CustomButton title="Login" handlePress={() => router.push('/sign-in')} />
         <Text className="text-grayfont text-center mt-5 font-DMSans">Don't have an account?{""} <Text onPress={() => router.push('/sign-up')} className="text-customPink">Sign up</Text></Text>
       </View>
     </ImageBackground>
