@@ -3,6 +3,7 @@ import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
 import { useState } from "react";
+import { images } from "../../constants";
 
 const SignIn = () => {
     const [form, setForm] = useState({
@@ -20,7 +21,7 @@ const SignIn = () => {
     <View className="h-full">
       <View className="h-[30%]">
         <ImageBackground
-          source={require("../../assets/images/loginimg.png")}
+          source={images.loginImage}
           resizeMode="cover"
           className="h-[100%] w-full"
         ></ImageBackground>

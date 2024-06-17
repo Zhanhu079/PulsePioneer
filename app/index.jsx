@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { ImageBackground, Text, View, Image } from "react-native";
-import running from "../assets/images/vectorsmart.png";
+import { images } from "../constants";
 import CustomButton from "../components/CustomButton";
 import { router } from "expo-router";
 import { useFonts } from 'expo-font';
@@ -20,14 +20,14 @@ export default function App() {
 
   return (
     <ImageBackground
-      source={require("../assets/images/bg-image.png")}
+      source={images.bgImage}
       resizeMode="cover"
       className="h-full bg-primary flex flex-1 space-y-48 items-center justify-center px-5"
     >
       <StatusBar backgroundColor="#2A2E43" style="light" />
       <View className="items-center">
         <Image 
-            source={running}
+            source={images.vectorSmart}
             className="w-[90px] h-[84px] mb-5"
             resizeMode="contain"
         />

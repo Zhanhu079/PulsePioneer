@@ -1,12 +1,12 @@
 import { View, Text, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-const Profile = () => {
+const Workout = () => {
   return (
     <SafeAreaView className="h-full bg-primary">
-      <Text>Profile</Text>
+      <Text>Workout</Text>
     </SafeAreaView>
   )
 }
 
-export default Profile
+export default Workout
