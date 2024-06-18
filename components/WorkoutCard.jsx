@@ -1,6 +1,7 @@
 import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
+import { router } from "expo-router";
 
-const FeaturedCard = ({
+const WorkoutCard = ({
   imageUrl,
   muscleGroup,
   exerciseNumber,
@@ -8,7 +9,11 @@ const FeaturedCard = ({
   otherStyles,
 }) => {
   return (
-    <View className={`w-[390px] h-[190px] p-5 ${otherStyles}`}>
+    <TouchableOpacity
+      activeOpacity={0.6}
+      onPress={() => router.push("/workout/:id")}
+      className={`w-[390px] h-[190px] p-5 ${otherStyles}`}
+    >
       <ImageBackground
         source={imageUrl}
         resizeMode="cover"
@@ -38,8 +43,8 @@ const FeaturedCard = ({
           </View>
         </View>
       </ImageBackground>
-    </View>
+    </TouchableOpacity>
   );
 };
 
-export default FeaturedCard;
+export default WorkoutCard;

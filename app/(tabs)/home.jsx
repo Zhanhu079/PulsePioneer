@@ -1,7 +1,7 @@
 import { View, Text, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Greeting from "../../components/Greeting";
-import FeaturedCard from "../../components/FeaturedCard";
+import WorkoutCard from "../../components/WorkoutCard";
 import { images } from "../../constants";
 
 const Home = () => {
@@ -20,19 +20,19 @@ const Home = () => {
           }}
           showsVerticalScrollIndicator={false}
         >
-          <FeaturedCard
+          <WorkoutCard
             imageUrl={images.featured1}
             muscleGroup="Chest"
             exerciseNumber={7}
             difficulty="Medium"
           />
-          <FeaturedCard
+          <WorkoutCard
             imageUrl={images.featured2}
             muscleGroup="Biceps"
             exerciseNumber={10}
             difficulty="Beginner"
           />
-          <FeaturedCard
+          <WorkoutCard
             imageUrl={images.featured3}
             muscleGroup="Shoulders"
             exerciseNumber={10}
