@@ -5,9 +5,10 @@ const FeaturedCard = ({
   muscleGroup,
   exerciseNumber,
   difficulty,
+  otherStyles,
 }) => {
   return (
-    <View className="w-[390px] h-[190px] p-5">
+    <View className={`w-[390px] h-[190px] p-5 ${otherStyles}`}>
       <ImageBackground
         source={imageUrl}
         resizeMode="cover"

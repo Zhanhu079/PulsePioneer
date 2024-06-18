@@ -6,16 +6,17 @@ import { images } from "../../constants";
 
 const Home = () => {
   return (
-    <SafeAreaView className="h-full bg-primary-100 pb-50">
+    <SafeAreaView className="h-full bg-primary-100">
       <Greeting name="Bohlale" />
 
       <View className="bg-primary h-full flex items-center rounded-3xl py-7">
-        <Text className="text-grayfont text-lg">Featured Workouts</Text>
+        <Text className="text-grayfont text-lg mb-3">Let's continue your fitness challenge.</Text>
 
         <ScrollView
           contentContainerStyle={{
             width: "100%",
             borderRadius: 10,
+            paddingBottom: 200
           }}
           showsVerticalScrollIndicator={false}
         >
@@ -31,6 +32,13 @@ const Home = () => {
             exerciseNumber={10}
             difficulty="Beginner"
           />
+          <FeaturedCard
+            imageUrl={images.featured3}
+            muscleGroup="Shoulders"
+            exerciseNumber={10}
+            difficulty="Intermediate"
+            otherStyles="mb-50"
+          /> 
         </ScrollView>
       </View>
     </SafeAreaView>
