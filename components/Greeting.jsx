@@ -5,7 +5,7 @@ const Greeting = (props) => {
   return (
     <View className="mx-7 my-10">
       <Text className="text-grayfont text-3xl font-Inter">Hello</Text>
-      <Text className="text-white text-3xl font-Inter">{props.name}</Text>
+      <Text className="text-white text-3xl font-Inter">{props.name} 👋</Text>
     </View>
   );
 };
