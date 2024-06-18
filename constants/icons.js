@@ -1,6 +1,6 @@
 import back from '../assets/icons/back.png';
 import home from '../assets/icons/home.png';
-import profile from '../assets/icons/profileIcon.png';
+import profile from '../assets/icons/profile.png';
 import settings from '../assets/icons/gear.png';
 import workout from '../assets/icons/workout.png';
 
