@@ -11,7 +11,7 @@ const WorkoutCard = ({
   return (
     <TouchableOpacity
       activeOpacity={0.6}
-      onPress={() => router.push("/workouts/:id")}
+      onPress={() => router.push(`/workouts/${muscleGroup}`)}
       className={`w-[390px] h-[190px] p-5 ${otherStyles}`}
     >
       <ImageBackground
