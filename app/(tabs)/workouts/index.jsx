@@ -4,9 +4,9 @@ import { Link } from 'expo-router'
 
 const Workouts = () => {
   return (
-    <SafeAreaView className="h-full bg-primary">
+    <SafeAreaView className="h-full bg-primary flex items-center justify-center">
       <Text>Workouts Screen</Text>
-      <Link href="workouts/1">Go to workout details</Link>
+      <Link className='text-blue-200' href="workouts/1">Go to workout details</Link>
     </SafeAreaView>
   )
 }

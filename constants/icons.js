@@ -3,6 +3,8 @@ import home from '../assets/icons/home.png';
 import profile from '../assets/icons/profile.png';
 import settings from '../assets/icons/gear.png';
 import workout from '../assets/icons/workout.png';
+import eyeHide from "../assets/icons/eye-hide.png";
+import eye from "../assets/icons/eye.png";
 
 export default {
     back,
@@ -10,4 +12,6 @@ export default {
     profile,
     settings,
     workout,
+    eye,
+    eyeHide,
 }
