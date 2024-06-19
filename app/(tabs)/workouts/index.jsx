@@ -1,12 +1,14 @@
 import { View, Text, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { Link } from 'expo-router'
 
-const Workout = () => {
+const Workouts = () => {
   return (
     <SafeAreaView className="h-full bg-primary">
-      <Text>Workout</Text>
+      <Text>Workouts Screen</Text>
+      <Link href="workouts/1">Go to workout details</Link>
     </SafeAreaView>
   )
 }
 
-export default Workout
+export default Workouts
