@@ -50,7 +50,7 @@ const TabsLayout = () => {
       />
 
       <Tabs.Screen
-        name="workout"
+        name="workouts"
         options={{
           title: "Workout",
           headerShown: false,
