@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams } from "expo-router";
-import BackButton from "../../../components/BackButton";
+import BackButton from "../../../../components/BackButton";
 import { router } from "expo-router";
 import axios from "axios";
 import { useEffect } from "react";
@@ -21,9 +21,8 @@ const WorkoutDetails = () => {
   }, [workoutId])
 
 
-
   return (
-    <SafeAreaView className="h-full bg-primary px-5">
+    <SafeAreaView className="h-full bg-primary px-5 relative z-10">
       <BackButton
         handlePress={()=>router.push('/workouts')}
       />

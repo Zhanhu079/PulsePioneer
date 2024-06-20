@@ -10,7 +10,7 @@ const Home = () => {
       <Greeting name="Bohlale" />
 
       <View className="bg-primary h-full flex items-center rounded-3xl py-7">
-        <Text className="text-grayfont text-lg mb-3">Let's continue your fitness challenge.</Text>
+        <Text className="text-grayfont text-lg mb-3">Featured Workouts</Text>
 
         <ScrollView
           contentContainerStyle={{
@@ -23,7 +23,7 @@ const Home = () => {
           <WorkoutCard
             imageUrl={images.featured1}
             muscleGroup="Chest"
-            exerciseNumber={7}
+            exerciseNumber={10}
             difficulty="Medium"
           />
           <WorkoutCard

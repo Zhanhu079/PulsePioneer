@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { icons } from '../constants'
 
-const BackButton = ({ handlePress }) => {
+const BackButton = ({ handlePress, otherStyles }) => {
   return (
     <View>
       <TouchableOpacity 
@@ -12,7 +12,7 @@ const BackButton = ({ handlePress }) => {
             <Image 
                 source={icons.back}
                 resizeMode="contain"
-                className="h-[25px] w-[25px]"
+                className={`h-[25px] w-[25px] ${otherStyles}`}
                 tintColor="#454F63"
             />
         

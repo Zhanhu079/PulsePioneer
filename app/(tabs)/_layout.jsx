@@ -18,25 +18,24 @@ const TabIcon = ({ icon, color }) => {
 const TabsLayout = () => {
   return (
     <Tabs
-    screenOptions={{
-      tabBarActiveTintColor: "#E4447C",
-      tabBarInactiveTintColor: "#78849E",
-      tabBarStyle: {
-        position: 'absolute', 
-        bottom: 30,         
-        left: 0,              
-        right: 0,             
-        backgroundColor: "white",
-        borderTopWidth: 1,
-        borderTopColor: "white",
-        borderRadius: 25,   
-        marginBlock: 10,  
-        marginHorizontal: 15,
-        paddingTop: 22
-        
-      },
-      tabBarShowLabel: false,
-    }}
+      screenOptions={{
+        tabBarActiveTintColor: "#E4447C",
+        tabBarInactiveTintColor: "#78849E",
+        tabBarStyle: {
+          position: "absolute",
+          bottom: 30,
+          left: 0,
+          right: 0,
+          backgroundColor: "white",
+          borderTopWidth: 1,
+          borderTopColor: "white",
+          borderRadius: 25,
+          marginBlock: 10,
+          marginHorizontal: 15,
+          paddingTop: 22,
+        },
+        tabBarShowLabel: false,
+      }}
     >
       <Tabs.Screen
         name="home"
@@ -56,6 +55,17 @@ const TabsLayout = () => {
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <TabIcon icon={icons.workout} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="search"
+        options={{
+          title: "Search",
+          headerShown: false,
+          tabBarIcon: ({ color }) => (
+            <TabIcon icon={icons.search} color={color} />
           ),
         }}
       />
