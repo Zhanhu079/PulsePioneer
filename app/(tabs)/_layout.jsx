@@ -4,7 +4,7 @@ import { icons } from "../../constants";
 
 const TabIcon = ({ icon, color }) => {
   return (
-    <View className="items-center justify-center gap-2">
+    <View>
       <Image
         source={icon}
         resizeMode="contain"
@@ -22,11 +22,19 @@ const TabsLayout = () => {
         tabBarActiveTintColor: "#E4447C",
         tabBarInactiveTintColor: "#78849E",
         tabBarStyle: {
-          backgroundColor: "#2A2E43",
-          height: 84,
+          position: "absolute",
+          bottom: 30,
+          left: 0,
+          right: 0,
+          backgroundColor: "white",
           borderTopWidth: 1,
-          borderTopColor: "#353A50",
+          borderTopColor: "white",
+          borderRadius: 25,
+          marginBlock: 10,
+          marginHorizontal: 15,
+          paddingTop: 22,
         },
+        tabBarShowLabel: false,
       }}
     >
       <Tabs.Screen
@@ -41,12 +49,23 @@ const TabsLayout = () => {
       />
 
       <Tabs.Screen
-        name="workout"
+        name="workouts"
         options={{
           title: "Workout",
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <TabIcon icon={icons.workout} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="search"
+        options={{
+          title: "Search",
+          headerShown: false,
+          tabBarIcon: ({ color }) => (
+            <TabIcon icon={icons.search} color={color} />
           ),
         }}
       />
