@@ -7,7 +7,7 @@ import { images } from "../../constants";
 const Home = () => {
   return (
     <SafeAreaView className="h-full bg-primary-100">
-      <Greeting name="Bohlale" />
+      <Greeting name="Bohlale" initials="BM" />
 
       <View className="bg-primary h-full flex items-center rounded-3xl py-7">
         <Text className="text-grayfont text-lg mb-3">Featured Workouts</Text>
