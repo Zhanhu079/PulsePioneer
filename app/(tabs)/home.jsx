@@ -3,11 +3,25 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Greeting from "../../components/Greeting";
 import WorkoutCard from "../../components/WorkoutCard";
 import { images } from "../../constants";
+import { FIREBASE_AUTH } from "../../FirebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
+import { useState, useEffect } from "react";
 
 const Home = () => {
+  const auth = FIREBASE_AUTH;
+  const [user, setUser] = useState('');
+
+  useEffect(() => {
+    onAuthStateChanged(FIREBASE_AUTH, (user) => {
+      setUser(user.displayName)
+      console.log('user: ', user);
+    })
+  }, [])
+
+
   return (
     <SafeAreaView className="h-full bg-primary-100">
-      <Greeting name="Bohlale" initials="BM" />
+      <Greeting name={user} initials="" />
 
       <View className="bg-primary h-full flex items-center rounded-3xl py-7">
         <Text className="text-grayfont text-lg mb-3">Featured Workouts</Text>

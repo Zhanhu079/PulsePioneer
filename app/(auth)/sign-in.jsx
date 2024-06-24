@@ -1,9 +1,11 @@
-import { View, Text, ScrollView, ImageBackground } from "react-native";
+import { View, Text, ScrollView, ImageBackground, Alert, ActivityIndicator } from "react-native";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { images } from "../../constants";
+import { FIREBASE_AUTH } from "../../FirebaseConfig";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
 const SignIn = () => {
     const [form, setForm] = useState({
@@ -11,11 +13,33 @@ const SignIn = () => {
         password: ""
     })
 
+    const [loading, setLoading] = useState(false)
 
-    const submit = () => {
-        router.push('/home')
-        console.log(form)
+    const auth = FIREBASE_AUTH;
+
+    const submit = async () => {
+        setLoading(true)
+        try {
+          const response = await signInWithEmailAndPassword(auth, form.email, form.password);
+          console.log(response)
+          router.push('/home')
+        } catch (error) {
+          console.log(error)
+          Alert.alert('Sign in failed: ' + error.message)
+          ale
+        } finally {
+          setLoading(false)
+        }
+         
     }
+
+    // const [user, setUser] = useState(null);
+
+    // useEffect(() => {
+    //   onAuthStateChanged(FIREBASE_AUTH, (user) => {
+    //     console.log('user: ', user.uid);
+    //   })
+    // }, [])
 
   return (
     <View className="h-full">
@@ -41,6 +65,10 @@ const SignIn = () => {
           <Text className="text-grayfont mt-4 text-center font-DMSans mb-10">
             Login in to your account
           </Text>
+
+          {loading && (
+            <ActivityIndicator size="large" color="#E4447C" className="mb-5" />
+          )}
 
           <View className="w-full">
             <FormField title="Email" value={form.email} placeholder="Email" handleChangeText={(e) => setForm({ ...form, email: e })} />

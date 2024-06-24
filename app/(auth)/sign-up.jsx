@@ -1,22 +1,45 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, ActivityIndicator, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BackButton from "../../components/BackButton";
 import { router } from "expo-router";
 import FormField from "../../components/FormField";
 import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
+import { FIREBASE_AUTH } from "../../FirebaseConfig";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const SignUp = () => {
-    const [form, setForm] = useState({
-        username: "",
-        email: "",
-        password: ""
-    })
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const [loading, setLoading] = useState(false);
 
-    const submit = () => {
-        console.log(form)
-        router.push('/home')
+  const auth = FIREBASE_AUTH;
+
+  const submit = async () => {
+    setLoading(true);
+    try {
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        form.email,
+        form.password
+      );
+      console.log(response);
+      if (response.user) {
+        await updateProfile(response.user, {
+          displayName: form.username, // Use the desired display name
+        });
+      }
+      router.push("/home");
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Sign up failed: " + error.message);
+    } finally {
+      setLoading(false);
     }
+  };
 
   return (
     <SafeAreaView className="h-full bg-primary px-5">
@@ -26,27 +49,31 @@ const SignUp = () => {
           Create an account
         </Text>
 
+        {loading && (
+          <ActivityIndicator size="large" color="#E4447C" className="mb-5" />
+        )}
+
         <View>
-          <FormField 
+          <FormField
             title="Username"
             value={form.username}
             placeholder="Username"
-            handleChangeText={(e)=>setForm({ ...form, username: e })}
+            handleChangeText={(e) => setForm({ ...form, username: e })}
           />
-          <FormField 
+          <FormField
             title="Email"
             value={form.email}
             placeholder="Email"
-            handleChangeText={(e)=>setForm({ ...form, email: e })}
+            handleChangeText={(e) => setForm({ ...form, email: e })}
           />
-          <FormField 
+          <FormField
             title="Password"
             value={form.password}
             placeholder="Password"
-            handleChangeText={(e)=>setForm({ ...form, password: e })}
+            handleChangeText={(e) => setForm({ ...form, password: e })}
           />
 
-          <CustomButton 
+          <CustomButton
             title="Continue"
             handlePress={submit}
             otherStyles="mt-5"
