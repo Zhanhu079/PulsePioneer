@@ -7,6 +7,9 @@ import eyeHide from "../assets/icons/eye-hide.png";
 import eye from "../assets/icons/eye.png";
 import search from '../assets/icons/search.png'
 import menu from '../assets/icons/menu.png'
+import gym from '../assets/icons/gym.png'
+import mail from '../assets/icons/mail.png'
+import pencil from '../assets/icons/pencil.png'
 
 export default {
     back,
@@ -18,4 +21,7 @@ export default {
     eyeHide,
     search,
     menu,
+    gym,
+    mail,
+    pencil,
 }

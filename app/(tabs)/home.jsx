@@ -8,7 +8,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
 
 const Home = () => {
-  const auth = FIREBASE_AUTH;
   const [user, setUser] = useState('');
 
   useEffect(() => {

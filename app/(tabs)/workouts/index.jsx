@@ -30,7 +30,7 @@ const Workouts = () => {
             imageUrl={images.hamstrings}
             muscleGroup="Hamstrings"
             exerciseNumber={10}
-            difficulty="Intermediate"
+            difficulty="Beginner"
             otherStyles="mb-50"
           />
           <WorkoutCard

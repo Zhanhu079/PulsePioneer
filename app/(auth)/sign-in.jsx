@@ -21,7 +21,6 @@ const SignIn = () => {
         setLoading(true)
         try {
           const response = await signInWithEmailAndPassword(auth, form.email, form.password);
-          console.log(response)
           router.push('/home')
         } catch (error) {
           console.log(error)
