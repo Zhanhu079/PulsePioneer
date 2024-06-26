@@ -6,6 +6,7 @@ import workout from '../assets/icons/workout.png';
 import eyeHide from "../assets/icons/eye-hide.png";
 import eye from "../assets/icons/eye.png";
 import search from '../assets/icons/search.png'
+import menu from '../assets/icons/menu.png'
 
 export default {
     back,
@@ -16,4 +17,5 @@ export default {
     eye,
     eyeHide,
     search,
+    menu,
 }

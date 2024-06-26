@@ -31,7 +31,7 @@ const TabsLayout = () => {
           borderTopColor: "white",
           borderRadius: 25,
           marginBlock: 10,
-          marginHorizontal: 15,
+          marginHorizontal: 12.5,
           paddingTop: 22,
         },
         tabBarShowLabel: false,

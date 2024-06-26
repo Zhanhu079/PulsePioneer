@@ -35,19 +35,19 @@ const Home = () => {
           showsVerticalScrollIndicator={false}
         >
           <WorkoutCard
-            imageUrl={images.featured1}
+            imageUrl={images.chest}
             muscleGroup="Chest"
             exerciseNumber={10}
-            difficulty="Medium"
+            difficulty="Intermediate"
           />
           <WorkoutCard
-            imageUrl={images.featured2}
+            imageUrl={images.biceps}
             muscleGroup="Biceps"
             exerciseNumber={10}
-            difficulty="Beginner"
+            difficulty="Intermediate"
           />
           <WorkoutCard
-            imageUrl={images.featured3}
+            imageUrl={images.shoulders}
             muscleGroup="Shoulders"
             exerciseNumber={10}
             difficulty="Intermediate"

@@ -7,7 +7,7 @@ const BackButton = ({ handlePress, otherStyles }) => {
       <TouchableOpacity 
         onPress={handlePress}
         activeOpacity={0.7}
-        className="w-[25px]  mt-5 mb-10"
+        className={`w-[25px]  mt-5 ${otherStyles}`}
         >
             <Image 
                 source={icons.back}

@@ -8,8 +8,8 @@ import { images } from "../../../constants";
 const Workouts = () => {
   return (
     <SafeAreaView className="h-full bg-primary">
-      <BackButton handlePress={() => router.push("/home")} otherStyles="ml-5" />
-      <Text className="mx-auto text-white text-2xl font-Inter">Workouts</Text>
+      <BackButton handlePress={() => router.push("/home")} otherStyles="ml-2" />
+      <Text className="mx-auto text-white text-2xl font-Inter mt-10">Workouts</Text>
       <View className="bg-primary h-full flex items-center w-full">
         <ScrollView
           contentContainerStyle={{
@@ -59,13 +59,13 @@ const Workouts = () => {
             difficulty="Intermediate"
           />
           <WorkoutCard
-            imageUrl={images.featured1}
+            imageUrl={images.chest}
             muscleGroup="Chest"
             exerciseNumber={10}
             difficulty="Intermediate"
           />
           <WorkoutCard
-            imageUrl={images.featured2}
+            imageUrl={images.biceps}
             muscleGroup="Biceps"
             exerciseNumber={10}
             difficulty="Beginner"
@@ -78,7 +78,7 @@ const Workouts = () => {
             otherStyles="mb-50"
           />
           <WorkoutCard
-            imageUrl={images.featured3}
+            imageUrl={images.shoulders}
             muscleGroup="Shoulders"
             exerciseNumber={10}
             difficulty="Intermediate"
