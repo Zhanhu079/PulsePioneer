@@ -27,7 +27,10 @@ const WorkoutDetails = () => {
     <View className="h-full bg-primary relative z-10">
       <View className="h-[30%]">
         <ImageBackground
-          source={images.triceps}
+          source={workoutId === "Chest" ? images.chest : workoutId === "Triceps" ? images.triceps : workoutId === "Hamstrings" ? images.hamstrings : workoutId === "Traps" ? images.traps : 
+            workoutId === "Abdominals" ? images.abs : workoutId === "Biceps" ? images.biceps : workoutId === "Glutes" ? images.glutes : 
+            workoutId === "Shoulders" ? images.shoulders : workoutId === "Forearms" ? images.forearm : images.lats
+          }
           resizeMode="cover"
           className="h-full w-full flex flex-1 overflow-hidden"
         >
