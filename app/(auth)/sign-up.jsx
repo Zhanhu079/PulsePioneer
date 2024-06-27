@@ -5,7 +5,8 @@ import { router } from "expo-router";
 import FormField from "../../components/FormField";
 import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
-import { FIREBASE_AUTH } from "../../FirebaseConfig";
+import { collection, AddDoc } from "firebase/firestore";
+import { FIREBASE_AUTH, FIRESTORE_DB } from "../../FirebaseConfig";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const SignUp = () => {
@@ -17,6 +18,7 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
 
   const auth = FIREBASE_AUTH;
+  const firestoreDb = FIRESTORE_DB;
 
   const submit = async () => {
     setLoading(true);
@@ -32,6 +34,10 @@ const SignUp = () => {
           displayName: form.username, // Use the desired display name
         });
       }
+
+      // Create a Firestore document for the user using UID as the document ID
+      // const docRef
+
       router.push("/home");
     } catch (error) {
       console.log(error);
@@ -45,7 +51,7 @@ const SignUp = () => {
     <SafeAreaView className="h-full bg-primary px-5">
       <BackButton handlePress={() => router.push("/")} />
       <ScrollView contentContainerStyle={{ height: "100%" }}>
-        <Text className="text-white font-semibold text-4xl font-Inter text-center mb-16">
+        <Text className="text-white font-semibold text-4xl font-Inter text-center mt-4 mb-16">
           Create an account
         </Text>
 

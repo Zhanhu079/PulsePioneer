@@ -6,16 +6,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ExerciseCard from "../../../../components/ExerciseCard";
 import { images } from "../../../../constants";
+import { API_KEY } from '@env'
 
 const WorkoutDetails = () => {
   const { workoutId } = useLocalSearchParams();
   const [exerciseList, setExerciseList] = useState([]);
+  const apiKey = process.env.API_KEY
 
   useEffect(() => {
     axios({
       method: "get",
       url: `https://api.api-ninjas.com/v1/exercises?muscle=${workoutId}`,
-      headers: { "X-Api-Key": "f8frhEviSRwQ7hXnBfdCYg==T3jzXXok04AtuDZJ" },
+      headers: { "X-Api-Key": apiKey },
       responseType: "json",
     }).then((response) => {
       const exercises = response.data;
