@@ -5,7 +5,7 @@ import { router } from "expo-router";
 import FormField from "../../components/FormField";
 import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
-import { collection, AddDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { FIREBASE_AUTH, FIRESTORE_DB } from "../../FirebaseConfig";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
@@ -36,7 +36,13 @@ const SignUp = () => {
       }
 
       // Create a Firestore document for the user using UID as the document ID
-      // const docRef
+      const docRef = await addDoc(collection(firestoreDb, "users"), {
+        name: form.username,
+        email: form.email,
+        workoutsCompleted: [],
+        savedExercises: 0
+      })
+      console.log("Document written with ID: ", docRef.id);
 
       router.push("/home");
     } catch (error) {
