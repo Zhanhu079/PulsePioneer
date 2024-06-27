@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, TouchableOpacity, Image } from "react-native";
 import { icons } from '../constants'
 
 const BackButton = ({ handlePress, otherStyles }) => {

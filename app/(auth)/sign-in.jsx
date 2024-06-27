@@ -2,10 +2,10 @@ import { View, Text, ScrollView, ImageBackground, Alert, ActivityIndicator } fro
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { images } from "../../constants";
 import { FIREBASE_AUTH } from "../../FirebaseConfig";
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const SignIn = () => {
     const [form, setForm] = useState({
@@ -31,14 +31,6 @@ const SignIn = () => {
         }
          
     }
-
-    // const [user, setUser] = useState(null);
-
-    // useEffect(() => {
-    //   onAuthStateChanged(FIREBASE_AUTH, (user) => {
-    //     console.log('user: ', user.uid);
-    //   })
-    // }, [])
 
   return (
     <View className="h-full">
