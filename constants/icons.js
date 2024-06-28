@@ -10,6 +10,9 @@ import menu from '../assets/icons/menu.png'
 import gym from '../assets/icons/gym.png'
 import mail from '../assets/icons/mail.png'
 import pencil from '../assets/icons/pencil.png'
+import add from '../assets/icons/add.png'
+import logout from '../assets/icons/logout.png'
+import library from '../assets/icons/library.png'
 
 export default {
     back,
@@ -24,4 +27,7 @@ export default {
     gym,
     mail,
     pencil,
+    add,
+    logout,
+    library,
 }

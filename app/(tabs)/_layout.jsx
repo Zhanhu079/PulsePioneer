@@ -60,12 +60,12 @@ const TabsLayout = () => {
       />
 
       <Tabs.Screen
-        name="search"
+        name="library"
         options={{
-          title: "Search",
+          title: "Library",
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <TabIcon icon={icons.search} color={color} />
+            <TabIcon icon={icons.library} color={color} />
           ),
         }}
       />
