@@ -40,10 +40,10 @@ const Home = () => {
             difficulty="Intermediate"
           />
           <WorkoutCard
-            imageUrl={images.biceps}
-            muscleGroup="Biceps"
+            imageUrl={images.triceps}
+            muscleGroup="Upper Arms"
             exerciseNumber={10}
-            difficulty="Intermediate"
+            difficulty="Beginner"
           />
           <WorkoutCard
             imageUrl={images.shoulders}

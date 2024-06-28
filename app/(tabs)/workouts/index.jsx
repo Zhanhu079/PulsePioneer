@@ -20,43 +20,43 @@ const Workouts = () => {
           showsVerticalScrollIndicator={false}
         >
           <WorkoutCard
-            imageUrl={images.triceps}
-            muscleGroup="Triceps"
+            imageUrl={images.cardio}
+            muscleGroup="Cardio"
             exerciseNumber={10}
-            difficulty="Intermediate"
+            difficulty="Beginner"
             otherStyles="mb-50"
           />
           <WorkoutCard
             imageUrl={images.hamstrings}
-            muscleGroup="Hamstrings"
+            muscleGroup="Upper Legs"
             exerciseNumber={10}
             difficulty="Beginner"
             otherStyles="mb-50"
           />
           <WorkoutCard
             imageUrl={images.traps}
-            muscleGroup="Traps"
-            exerciseNumber={10}
-            difficulty="Intermediate"
+            muscleGroup="Neck"
+            exerciseNumber={2}
+            difficulty="Beginner"
           />
           <WorkoutCard
             imageUrl={images.abs}
-            muscleGroup="Abdominals"
+            muscleGroup="Waist"
             exerciseNumber={10}
-            difficulty="Intermediate"
+            difficulty="Beginner"
             otherStyles="mb-50"
           />
           <WorkoutCard
             imageUrl={images.lats}
-            muscleGroup="Lats"
+            muscleGroup="Back"
             exerciseNumber={10}
-            difficulty="Intermediate"
+            difficulty="Beginner"
           />
           <WorkoutCard
             imageUrl={images.forearm}
-            muscleGroup="Forearms"
+            muscleGroup="Lower Arms"
             exerciseNumber={10}
-            difficulty="Intermediate"
+            difficulty="Beginner"
           />
           <WorkoutCard
             imageUrl={images.chest}
@@ -65,23 +65,23 @@ const Workouts = () => {
             difficulty="Intermediate"
           />
           <WorkoutCard
-            imageUrl={images.biceps}
-            muscleGroup="Biceps"
+            imageUrl={images.triceps}
+            muscleGroup="Upper Arms"
             exerciseNumber={10}
             difficulty="Beginner"
-          />
-          <WorkoutCard
-            imageUrl={images.glutes}
-            muscleGroup="Glutes"
-            exerciseNumber={10}
-            difficulty="Intermediate"
-            otherStyles="mb-50"
           />
           <WorkoutCard
             imageUrl={images.shoulders}
             muscleGroup="Shoulders"
             exerciseNumber={10}
             difficulty="Intermediate"
+            otherStyles="mb-50"
+          />
+          <WorkoutCard
+            imageUrl={images.calf}
+            muscleGroup="Lower Legs"
+            exerciseNumber={10}
+            difficulty="Beginner"
             otherStyles="mb-50"
           />
         </ScrollView>

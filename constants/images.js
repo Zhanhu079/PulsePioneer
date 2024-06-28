@@ -11,6 +11,8 @@ import forearm from '../assets/images/forearm.jpeg'
 import lats from '../assets/images/lats.png'
 import traps from '../assets/images/traps.jpg'
 import hamstrings from '../assets/images/hamstrings.jpg'
+import cardio from '../assets/images/cardio.jpeg'
+import calf from '../assets/images/calf.jpeg'
 
 export default {
     bgImage,
@@ -26,4 +28,6 @@ export default {
     lats,
     traps,
     hamstrings,
+    cardio,
+    calf,
 }

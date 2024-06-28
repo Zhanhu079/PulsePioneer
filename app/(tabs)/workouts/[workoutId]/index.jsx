@@ -6,32 +6,55 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ExerciseCard from "../../../../components/ExerciseCard";
 import { images } from "../../../../constants";
-import { API_KEY } from '@env'
+import { API_KEY, API_HOST, API_URL } from '@env'
 
 const WorkoutDetails = () => {
   const { workoutId } = useLocalSearchParams();
   const [exerciseList, setExerciseList] = useState([]);
   const apiKey = process.env.API_KEY
+  const apiHost = process.env.API_HOST
+  const url = process.env.API_URL
+
+  const fetchData = async () => {
+    if (!workoutId) {
+      console.error('workoutId is not defined');
+      return;
+    }
+
+    const lowerCaseWorkoutId = workoutId.toLowerCase();
+    const apiUrl = `${url}/bodyPart/${lowerCaseWorkoutId}`;
+    console.log('API URL:', apiUrl);
+
+    const options = {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-key': apiKey,
+        'x-rapidapi-host': apiHost
+      }
+    };
+    
+    try {
+      const response = await axios.get(apiUrl, options);
+      setExerciseList(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: `https://api.api-ninjas.com/v1/exercises?muscle=${workoutId}`,
-      headers: { "X-Api-Key": apiKey },
-      responseType: "json",
-    }).then((response) => {
-      const exercises = response.data;
-      setExerciseList(exercises);
-    });
-  }, []);
+    if (workoutId) {
+      fetchData();
+    }
+  }, [workoutId]);
 
   return (
     <View className="h-full bg-primary relative z-10">
       <View className="h-[30%]">
         <ImageBackground
-          source={workoutId === "Chest" ? images.chest : workoutId === "Triceps" ? images.triceps : workoutId === "Hamstrings" ? images.hamstrings : workoutId === "Traps" ? images.traps : 
-            workoutId === "Abdominals" ? images.abs : workoutId === "Biceps" ? images.biceps : workoutId === "Glutes" ? images.glutes : 
-            workoutId === "Shoulders" ? images.shoulders : workoutId === "Forearms" ? images.forearm : images.lats
+          source={workoutId === "Chest" ? images.chest : workoutId === "Upper Arms" ? images.triceps : workoutId === "Upper Legs" ? images.hamstrings : workoutId === "Neck" ? images.traps : 
+            workoutId === "Waist" ? images.abs : workoutId === "Glutes" ? images.glutes : 
+            workoutId === "Shoulders" ? images.shoulders : workoutId === "Lower Arms" ? images.forearm : workoutId === "Lower Legs" ? images.calf : workoutId === "Cardio" ? images.cardio : images.lats
           }
           resizeMode="cover"
           className="h-full w-full flex flex-1 overflow-hidden"
