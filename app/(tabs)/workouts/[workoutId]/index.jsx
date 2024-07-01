@@ -1,4 +1,4 @@
-import { View, Text, FlatList, ImageBackground } from "react-native";
+import { View, Text, FlatList, ImageBackground, ActivityIndicator } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import BackButton from "../../../../components/BackButton";
 import { router } from "expo-router";
@@ -11,6 +11,7 @@ import { API_KEY, API_HOST, API_URL } from '@env'
 const WorkoutDetails = () => {
   const { workoutId } = useLocalSearchParams();
   const [exerciseList, setExerciseList] = useState([]);
+  const [loading, setLoading] = useState(false);
   const apiKey = process.env.API_KEY
   const apiHost = process.env.API_HOST
   const url = process.env.API_URL
@@ -30,15 +31,22 @@ const WorkoutDetails = () => {
       headers: {
         'x-rapidapi-key': apiKey,
         'x-rapidapi-host': apiHost
-      }
+      },
+      params: {
+        limit: '10',
+        offset: '0'
+      },
     };
     
     try {
+      setLoading(true);
       const response = await axios.get(apiUrl, options);
       setExerciseList(response.data);
       console.log(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -84,6 +92,9 @@ const WorkoutDetails = () => {
 
       <View className="px-5 w-full bg-primary rounded-3xl pb-20 relative bottom-5">
         <Text className="my-10 text-grayfont text-3xl">Exercises</Text>
+        {loading && (
+            <ActivityIndicator size="large" color="#E4447C" className="my-5" />
+          )}
         <FlatList
           showsVerticalScrollIndicator={false}
           style={{

@@ -9,7 +9,7 @@ const Workouts = () => {
   return (
     <SafeAreaView className="h-full bg-primary">
       <BackButton handlePress={() => router.push("/home")} otherStyles="ml-2" />
-      <Text className="mx-auto text-white text-2xl font-Inter mt-10">Workouts</Text>
+      <Text className="mx-auto text-white text-2xl font-Inter font-semibold mt-10">Workouts</Text>
       <View className="bg-primary h-full flex items-center w-full">
         <ScrollView
           contentContainerStyle={{
