@@ -1,4 +1,12 @@
-import { View, Text, ScrollView, ImageBackground, Alert, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  ImageBackground,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
+import { Link } from "expo-router";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
@@ -8,29 +16,31 @@ import { FIREBASE_AUTH } from "../../FirebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 const SignIn = () => {
-    const [form, setForm] = useState({
-        email: "",
-        password: ""
-    })
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
 
-    const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
-    const auth = FIREBASE_AUTH;
+  const auth = FIREBASE_AUTH;
 
-    const submit = async () => {
-        setLoading(true)
-        try {
-          const response = await signInWithEmailAndPassword(auth, form.email, form.password);
-          router.push('/home')
-        } catch (error) {
-          console.log(error)
-          Alert.alert('Sign in failed: ' + error.message)
-          ale
-        } finally {
-          setLoading(false)
-        }
-         
+  const submit = async () => {
+    setLoading(true);
+    try {
+      const response = await signInWithEmailAndPassword(
+        auth,
+        form.email,
+        form.password
+      );
+      router.push("/home");
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Sign in failed: " + error.message);
+    } finally {
+      setLoading(false);
     }
+  };
 
   return (
     <View className="h-full">
@@ -62,25 +72,40 @@ const SignIn = () => {
           )}
 
           <View className="w-full">
-            <FormField title="Email" value={form.email} placeholder="Email" handleChangeText={(e) => setForm({ ...form, email: e })} />
+            <FormField
+              title="Email"
+              value={form.email}
+              placeholder="Email"
+              handleChangeText={(e) => setForm({ ...form, email: e })}
+            />
 
-            <FormField title="Password" value={form.password} placeholder="Password" handleChangeText={(e) => setForm({ ...form, password: e })} />
+            <FormField
+              title="Password"
+              value={form.password}
+              placeholder="Password"
+              handleChangeText={(e) => setForm({ ...form, password: e })}
+            />
 
             <CustomButton
               title="Continue"
               handlePress={submit}
               otherStyles="mt-5"
             />
+            <View className="mt-9 mx-auto flex items-center justify-between space-y-3">
+              <Link href="/forgot-password">
+                <Text className="text-white font-DMSans-Bold">Forgot password?</Text>
+              </Link>
 
-            <Text className="text-grayfont text-center mt-7 font-DMSans">
-              Don't have an account?{""}{" "}
-              <Text
-                onPress={() => router.push('/sign-up')}
-                className="text-customPink"
-              >
-                Sign up
+              <Text className="text-grayfont font-DMSans">
+                Don't have an account?{""}{" "}
+                <Text
+                  onPress={() => router.push("/sign-up")}
+                  className="text-customPink"
+                >
+                  Sign up
+                </Text>
               </Text>
-            </Text>
+            </View>
           </View>
         </ScrollView>
       </View>

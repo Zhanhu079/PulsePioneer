@@ -2,13 +2,13 @@ import { View, TextInput, TouchableOpacity, Image } from "react-native";
 import { icons } from "../constants";
 import { useState } from "react";
 
-const FormField = ({ title, value, placeholder, handleChangeText }) => {
+const FormField = ({ title, value, placeholder, handleChangeText, otherStyles }) => {
   const [showPassword, setshowPassword] = useState(false);
 
   return (
     <View
-      className="border border-primary-100 w-full h-16 p-4 rounded-lg bg-primary-100
-    mb-2 focus:border-customPink flex-row"
+      className={`border border-primary-100 w-full h-16 p-4 rounded-lg bg-primary-100
+    mb-2 focus:border-customPink flex-row ${otherStyles}`}
     >
       <TextInput
         className="flex-1 text-white font-DMSans-Bold w-full"
