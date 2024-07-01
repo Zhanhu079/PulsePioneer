@@ -9,7 +9,6 @@ module.exports = {
           100: "#353A50",
           200: "#707070"
         },
-        secondary: "#E4447C",
         grayfont: "#78849E",
         customPink: "#E4447C"
       },

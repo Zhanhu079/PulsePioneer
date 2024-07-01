@@ -1,74 +1,119 @@
-import { View, Text, ScrollView, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useState, useEffect } from "react";
-import { FIREBASE_AUTH } from "../../FirebaseConfig";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { FIREBASE_AUTH, FIRESTORE_DB } from "../../FirebaseConfig";
+import { router } from "expo-router";
 import ProfileCard from "../../components/ProfileCard";
 import { icons } from "../../constants";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { FIRESTORE_DB } from "../../FirebaseConfig";
 
 const Profile = () => {
+  const auth = FIREBASE_AUTH;
   const db = FIRESTORE_DB;
-  const [user, setUser] = useState("");
-  const userInfo = FIREBASE_AUTH.currentUser;
-  const signupDate = new Date(userInfo.metadata.creationTime);
+
+  const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
-
-  // TODO 
-  // Add logout feature 
-
-//  ----------------------------------------------------
-
+  const [signupDate, setSignupDate] = useState("");
   const [workoutsCompleted, setWorkoutsCompleted] = useState(0);
 
-  const getUserByEmail = async () => {
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      console.log("onAuthStateChanged user:", currentUser);
+      if (currentUser) {
+        try {
+          setUser(currentUser);
+          setEmail(currentUser.email || "");
+          const userCreationTime = new Date(currentUser.metadata.creationTime);
+          const formattedSignupDate = userCreationTime.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });
+          setSignupDate(formattedSignupDate);
+
+          // Fetch additional user data
+          await fetchUserData(currentUser.email);
+        } catch (error) {
+          console.error("Error setting user data:", error);
+        }
+      } else {
+        setUser(null);
+        setEmail("");
+        setSignupDate("");
+        setWorkoutsCompleted(0); // Reset workoutsCompleted if no user is signed in
+      }
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
+
+  const fetchUserData = async (userEmail) => {
     try {
-      const usersRef = collection(db, 'users');
-      const q = query(usersRef, where('email', '==', email));
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, where("email", "==", userEmail));
       const querySnapshot = await getDocs(q);
-  
+
       if (!querySnapshot.empty) {
         querySnapshot.forEach((doc) => {
           const userData = doc.data();
-          console.log('User data:', userData);
-          setWorkoutsCompleted(userData.workoutsCompleted)
+          console.log("User data:", userData);
+          setWorkoutsCompleted(userData.workoutsCompleted || 0);
         });
       } else {
-        console.log('No user found with this email');
+        console.log("No user found with this email");
       }
     } catch (error) {
-      console.log('Error fetching user:', error);
+      console.error("Error fetching user data:", error);
     }
   };
 
-
-  useEffect(() => {
-    onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      setUser(user.displayName);
-      setEmail(user.email);
-      console.log("Email:", email);
-    });
-
-    getUserByEmail();
-  }, [email]);
-
-
-  const formattedSignupDate = signupDate.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+      setEmail("");
+      setSignupDate("");
+      setWorkoutsCompleted(0);
+      Alert.alert("You have successfully signed out!");
+      router.push("/");
+    } catch (error) {
+      Alert.alert("Error signing out:", error.message);
+    }
+  };
 
   return (
     <SafeAreaView className="h-full bg-primary p-5">
+      <TouchableOpacity
+        onPress={logout}
+        activeOpacity={0.7}
+        className="absolute right-5 top-20"
+      >
+        <Image
+          source={icons.logout}
+          resizeMode="contain"
+          className="h-7 w-7"
+          tintColor="#E4447C"
+        />
+      </TouchableOpacity>
       <View className="flex w-full items-center mt-10">
-        <View className="h-[100px] w-[100px] bg-white rounded-full mb-5">
-          <Text className="text-center">{}</Text>
+        <View className="h-[100px] w-[100px] bg-primary-100 rounded-full mb-5 flex items-center justify-center">
+          <Text className="text-center text-2xl text-customPink">
+            {user && user.displayName ? user.displayName.charAt(0) : ""}
+          </Text>
         </View>
-        <Text className="text-white text-3xl font-Inter">{user}</Text>
+        <Text className="text-white text-3xl font-Inter">
+          {user && user.displayName ? user.displayName : "Guest"}
+        </Text>
         <Text className="text-grayfont font-DMSans my-3">
-          Member since {formattedSignupDate}
+          {user ? `Member since ${signupDate}` : ""}
         </Text>
       </View>
       <ScrollView

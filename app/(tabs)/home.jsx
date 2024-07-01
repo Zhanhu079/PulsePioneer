@@ -23,7 +23,7 @@ const Home = () => {
       <Greeting name={user} initials="" />
 
       <View className="bg-primary h-full flex items-center rounded-3xl py-7">
-        <Text className="text-grayfont text-lg mb-3">Featured Workouts</Text>
+        <Text className="text-grayfont text-lg mb-3">Let's continue your fitness challenge.</Text>
 
         <ScrollView
           contentContainerStyle={{
