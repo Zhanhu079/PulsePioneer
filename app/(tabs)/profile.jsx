@@ -143,14 +143,8 @@ const Profile = () => {
           {user ? `Member since ${signupDate}` : ""}
         </Text>
       </View>
-      <ScrollView
-        contentContainerStyle={{
-          height: "100%",
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
+
+      <View className="w-full flex items-center">
         <ProfileCard
           imageUrl={icons.gym}
           title="Progress"
@@ -174,7 +168,7 @@ const Profile = () => {
         </TouchableOpacity>
         {toggleHistory && (
           <FlatList
-            className="w-full"
+            className="w-full h-[100px]"
             data={workoutNames}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
@@ -210,7 +204,7 @@ const Profile = () => {
             </Text>
           </View>
         </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };

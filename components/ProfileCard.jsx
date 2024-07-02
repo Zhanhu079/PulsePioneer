@@ -2,7 +2,7 @@ import { View, Text, Image } from 'react-native'
 
 const ProfileCard = ({ imageUrl, title, workoutsCompleted, date }) => {
   return (
-    <View className="p-5 bg-primary-100 flex flex-row items-center space-x-5 rounded-3xl w-full h-[30%] my-5">
+    <View className="p-5 bg-primary-100 flex flex-row items-center space-x-5 rounded-3xl w-full h-[150px] my-5">
       <Image 
         source={imageUrl}
         resizeMode='contain'
