@@ -6,10 +6,17 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  FlatList,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  onSnapshot,
+} from "firebase/firestore";
 import { FIREBASE_AUTH, FIRESTORE_DB } from "../../FirebaseConfig";
 import { router } from "expo-router";
 import ProfileCard from "../../components/ProfileCard";
@@ -23,6 +30,11 @@ const Profile = () => {
   const [email, setEmail] = useState("");
   const [signupDate, setSignupDate] = useState("");
   const [workoutsCompleted, setWorkoutsCompleted] = useState(0);
+  const [toggleHistory, setToggleHistory] = useState(false);
+  const [workoutNames, setWorkoutNames] = useState([]);
+  const currentDate = new Date();
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  const formattedDate = currentDate.toLocaleDateString(undefined, options);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -32,17 +44,20 @@ const Profile = () => {
           setUser(currentUser);
           setEmail(currentUser.email || "");
           const userCreationTime = new Date(currentUser.metadata.creationTime);
-          const formattedSignupDate = userCreationTime.toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          });
+          const formattedSignupDate = userCreationTime.toLocaleDateString(
+            "en-US",
+            {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            }
+          );
           setSignupDate(formattedSignupDate);
 
           // Fetch additional user data
-          await fetchUserData(currentUser.email);
+          await setupUserListener(currentUser.email);
         } catch (error) {
-          console.error("Error setting user data:", error);
+          console.error("Error fetching user data:", error);
         }
       } else {
         setUser(null);
@@ -55,7 +70,7 @@ const Profile = () => {
     return () => unsubscribe();
   }, [auth]);
 
-  const fetchUserData = async (userEmail) => {
+  const setupUserListener = async (userEmail) => {
     try {
       const usersRef = collection(db, "users");
       const q = query(usersRef, where("email", "==", userEmail));
@@ -63,15 +78,26 @@ const Profile = () => {
 
       if (!querySnapshot.empty) {
         querySnapshot.forEach((doc) => {
-          const userData = doc.data();
-          console.log("User data:", userData);
-          setWorkoutsCompleted(userData.workoutsCompleted || 0);
+          const userDocRef = doc.ref;
+
+          // Set up real-time listener on the document
+          const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
+            if (docSnapshot.exists()) {
+              const userData = docSnapshot.data();
+              console.log("User data updated:", userData);
+              setWorkoutsCompleted(userData.workoutsCompleted.length || 0);
+              setWorkoutNames(userData.workoutsCompleted || []);
+            }
+          });
+
+          // Return the unsubscribe function to clean up the listener when the component unmounts
+          return unsubscribe;
         });
       } else {
         console.log("No user found with this email");
       }
     } catch (error) {
-      console.error("Error fetching user data:", error);
+      console.error("Error setting up user listener:", error);
     }
   };
 
@@ -82,6 +108,7 @@ const Profile = () => {
       setEmail("");
       setSignupDate("");
       setWorkoutsCompleted(0);
+      setWorkoutNames([]);
       Alert.alert("You have successfully signed out!");
       router.push("/");
     } catch (error) {
@@ -126,13 +153,37 @@ const Profile = () => {
       >
         <ProfileCard
           imageUrl={icons.gym}
-          title="Best Gym Day"
+          title="Progress"
           workoutsCompleted={workoutsCompleted}
-          date="10/06/2024"
-          time="12:04"
+          date={formattedDate}
         />
+        <TouchableOpacity
+          onPress={()=>setToggleHistory(!toggleHistory)}
+          activeOpacity={0.7}
+          className="w-full mb-5"
+        >
+          <View className="flex flex-row items-center space-x-3">
+            <Image
+              source={icons.time}
+              resizeMode="contain"
+              className="h-9 w-9"
+              tintColor="#E4447C"
+            />
+            <Text className="text-grayfont font-DMSans-Bold">History</Text>
+          </View>
+        </TouchableOpacity>
+        {toggleHistory && (
+          <FlatList
+            className="w-full"
+            data={workoutNames}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <Text className="text-grayfont text-[15px] font-DMSans mb-2">{item}</Text>
+            )}
+          />
+        )}
         <View className="w-full">
-          <Text className="text-white font-Inter text-xl font-semibold mb-7">
+          <Text className="text-white font-Inter text-xl font-semibold my-7">
             Support
           </Text>
           <View className="flex flex-row items-center space-x-3">

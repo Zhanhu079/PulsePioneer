@@ -1,4 +1,4 @@
-import { View, Text, FlatList, ImageBackground, ActivityIndicator } from "react-native";
+import { View, Text, FlatList, ImageBackground, ActivityIndicator, Alert } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import BackButton from "../../../../components/BackButton";
 import { router } from "expo-router";
@@ -6,7 +6,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ExerciseCard from "../../../../components/ExerciseCard";
 import { images } from "../../../../constants";
+import { FIREBASE_AUTH } from "../../../../FirebaseConfig";
+import { FIRESTORE_DB } from "../../../../FirebaseConfig";
+import { collection, query, where, getDocs, updateDoc, arrayUnion } from "firebase/firestore";
 import { API_KEY, API_HOST, API_URL } from '@env'
+import CheckButton from "../../../../components/CheckButton";
 
 const WorkoutDetails = () => {
   const { workoutId } = useLocalSearchParams();
@@ -15,6 +19,9 @@ const WorkoutDetails = () => {
   const apiKey = process.env.API_KEY
   const apiHost = process.env.API_HOST
   const url = process.env.API_URL
+
+  const auth = FIREBASE_AUTH;
+  const db = FIRESTORE_DB;
 
   const fetchData = async () => {
     if (!workoutId) {
@@ -49,6 +56,45 @@ const WorkoutDetails = () => {
       setLoading(false);
     }
   };
+
+  const updateWorkoutsComplete = async () => {
+    try {
+      // Get the current signed-in user
+      const user = auth.currentUser;
+      if (!user) {
+        throw new Error("No user is signed in");
+      }
+  
+      // Get the user's email
+      const userEmail = user.email;
+  
+      // Query Firestore to find the document with the user's email
+      const usersCollection = collection(db, "users");
+      const q = query(usersCollection, where("email", "==", userEmail));
+      const querySnapshot = await getDocs(q);
+  
+      if (querySnapshot.empty) {
+        throw new Error("No matching user found");
+      }
+  
+      // Assuming emails are unique, there should be only one matching document
+      const userDoc = querySnapshot.docs[0];
+      const userDocRef = userDoc.ref;
+      const userData = userDoc.data();
+  
+      // Update the workoutsCompleted array in the user's document
+      const newWorkout = workoutId;
+      const updatedWorkoutsCompleted = [...userData.workoutsCompleted, newWorkout];
+  
+      await updateDoc(userDocRef, {
+        workoutsCompleted: updatedWorkoutsCompleted
+      });
+  
+      Alert.alert("Workout complete");
+    } catch (error) {
+      console.error("Error updating workouts completed: ", error);
+    }
+  }
 
   useEffect(() => {
     if (workoutId) {
@@ -92,6 +138,10 @@ const WorkoutDetails = () => {
 
       <View className="px-5 w-full bg-primary rounded-3xl pb-20 relative bottom-5">
         <Text className="my-10 text-grayfont text-3xl">Exercises</Text>
+        <CheckButton 
+          handlePress={updateWorkoutsComplete}
+          otherStyles="absolute top-[-29px] right-10"
+        />
         {loading && (
             <ActivityIndicator size="large" color="#E4447C" className="my-5" />
           )}

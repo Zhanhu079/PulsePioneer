@@ -13,6 +13,8 @@ import pencil from '../assets/icons/pencil.png'
 import add from '../assets/icons/add.png'
 import logout from '../assets/icons/logout.png'
 import library from '../assets/icons/library.png'
+import check from '../assets/icons/check.png'
+import time from '../assets/icons/time.png'
 
 export default {
     back,
@@ -30,4 +32,6 @@ export default {
     add,
     logout,
     library,
+    check,
+    time,
 }
