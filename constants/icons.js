@@ -15,6 +15,7 @@ import logout from '../assets/icons/logout.png'
 import library from '../assets/icons/library.png'
 import check from '../assets/icons/check.png'
 import time from '../assets/icons/time.png'
+import tip from '../assets/icons/tip.png'
 
 export default {
     back,
@@ -34,4 +35,5 @@ export default {
     library,
     check,
     time,
+    tip,
 }
