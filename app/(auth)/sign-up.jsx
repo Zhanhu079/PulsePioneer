@@ -38,7 +38,7 @@ const SignUp = () => {
       // Create a Firestore document for the user using UID as the document ID
       const docRef = await addDoc(collection(firestoreDb, "users"), {
         name: form.username,
-        email: form.email,
+        email: form.email.toLowerCase(),
         workoutsCompleted: [],
         savedExercises: 0,
       });
