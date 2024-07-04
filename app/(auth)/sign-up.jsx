@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, ActivityIndicator, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BackButton from "../../components/BackButton";
-import { router } from "expo-router";
+import { router, Link } from "expo-router";
 import FormField from "../../components/FormField";
 import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
@@ -40,8 +40,8 @@ const SignUp = () => {
         name: form.username,
         email: form.email,
         workoutsCompleted: [],
-        savedExercises: 0
-      })
+        savedExercises: 0,
+      });
       console.log("Document written with ID: ", docRef.id);
 
       router.push("/home");
@@ -90,6 +90,12 @@ const SignUp = () => {
             handlePress={submit}
             otherStyles="mt-5"
           />
+          <View className="px-5 mt-10">
+            <Text className="text-center font-DMSans text-grayfont">
+              By clicking Continue you agree to the following{" "}
+              <Link href="/termsandconditions"><Text className="text-white font-DMSans-Bold">Terms and Conditions</Text></Link> without reservation
+            </Text>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
